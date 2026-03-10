@@ -28,6 +28,7 @@ export interface WorkItem {
   wide: boolean;
   videoUrl?: string;       // YouTube/Vimeo embed URL
   thumbnailUrl?: string;   // Static thumbnail image
+  externalUrl?: string;    // Link to external channel/page
 }
 
 export const WORK_ITEMS: WorkItem[] = [
