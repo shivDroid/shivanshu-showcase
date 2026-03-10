@@ -47,7 +47,7 @@ function WorkCard({ item, onClick }: { item: WorkItem; onClick: () => void }) {
         }}
       >
         {/* Decorative grid */}
-        {!item.thumbnailUrl && (
+        {!thumbnail && (
           <div
             className="absolute inset-0"
             style={{
