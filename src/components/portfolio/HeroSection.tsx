@@ -93,19 +93,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Stats */}
-      <div className="flex flex-wrap gap-8 md:gap-12 mt-16 pt-8 border-t border-border relative">
-        {STATS.map((s) => (
-          <div key={s.l}>
-            <div className="font-heading font-extrabold text-[28px] tracking-tight">
-              {s.n}
-            </div>
-            <div className="text-[11px] text-muted-foreground tracking-[0.1em] uppercase font-mono">
-              {s.l}
-            </div>
-          </div>
-        ))}
-      </div>
     </section>
   );
 }
