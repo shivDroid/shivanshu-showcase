@@ -41,8 +41,8 @@ function WorkCard({ item, onClick }: { item: WorkItem; onClick: () => void }) {
         className="flex items-center justify-center relative overflow-hidden"
         style={{
           aspectRatio: item.wide ? "16/7" : item.aspect,
-          background: item.thumbnailUrl
-            ? `url(${item.thumbnailUrl}) center/cover`
+          background: thumbnail
+            ? `url(${thumbnail}) center/cover`
             : `linear-gradient(135deg, ${item.color}11 0%, #000 100%)`,
         }}
       >
