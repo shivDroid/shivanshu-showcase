@@ -128,7 +128,10 @@ export default function WorkSection() {
             <WorkCard
               key={item.id}
               item={item}
-              onClick={() => item.videoUrl ? setSelectedItem(item) : null}
+              onClick={() => {
+                if (item.videoUrl) setSelectedItem(item);
+                else if (item.externalUrl) window.open(item.externalUrl, "_blank");
+              }}
             />
           ))}
         </div>
