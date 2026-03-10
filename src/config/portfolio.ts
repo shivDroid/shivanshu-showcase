@@ -5,21 +5,13 @@
 
 export const NAV_LINKS = ["Work", "About", "Services", "Contact"];
 
-// ── Hero Stats ──
-export const STATS = [
-  { n: "50K+", l: "YouTube Views" },
-  { n: "4+", l: "AI Tools Mastered" },
-  { n: "∞", l: "Automation Flows Built" },
-  { n: "2", l: "Faceless Channels" },
-];
-
 // ── Work Categories ──
 export const CATEGORIES = [
   { id: "all", label: "All" },
-  { id: "faceless", label: "Faceless YouTube" },
+  { id: "music", label: "Music Channels" },
+  { id: "medical", label: "Medical Channels" },
   { id: "ugc", label: "UGC Videos" },
   { id: "ads", label: "Ad Creatives" },
-  { id: "automations", label: "AI Automations" },
 ];
 
 // ── Work Items ──
