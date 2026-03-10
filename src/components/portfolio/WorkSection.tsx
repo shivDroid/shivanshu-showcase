@@ -13,9 +13,15 @@ function Tag({ color, children }: { color: string; children: React.ReactNode }) 
   );
 }
 
+function getYouTubeThumbnail(videoUrl?: string): string | null {
+  if (!videoUrl) return null;
+  const match = videoUrl.match(/\/embed\/([a-zA-Z0-9_-]+)/);
+  return match ? `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg` : null;
+}
+
 function WorkCard({ item, onClick }: { item: WorkItem; onClick: () => void }) {
   const [hovered, setHovered] = useState(false);
-
+  const thumbnail = item.thumbnailUrl || getYouTubeThumbnail(item.videoUrl);
   return (
     <div
       onMouseEnter={() => setHovered(true)}
