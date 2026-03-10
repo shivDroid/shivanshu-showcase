@@ -191,14 +191,6 @@ export const SERVICES: ServiceItem[] = [
   },
   {
     no: "03",
-    title: "AI Automation Systems",
-    desc: "Custom workflow automation using n8n, Make, and LLMs. Lead gen, content ops, CRM — built to run without you.",
-    tools: ["n8n", "Make", "Claude API", "Zapier"],
-    color: "#7B61FF",
-    ctaLink: "",
-  },
-  {
-    no: "04",
     title: "UGC & Ad Creatives",
     desc: "Scroll-stopping UGC-style video ads — hook, story, CTA. Built for Meta, TikTok and YouTube pre-roll.",
     tools: ["CapCut", "Captions", "Descript"],
