@@ -1,5 +1,3 @@
-import { STATS } from "@/config/portfolio";
-
 export default function HeroSection() {
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
