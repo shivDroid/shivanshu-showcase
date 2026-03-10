@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { CATEGORIES, WORK_ITEMS, type WorkItem } from "@/config/portfolio";
 import VideoModal from "./VideoModal";
 
@@ -13,9 +13,15 @@ function Tag({ color, children }: { color: string; children: React.ReactNode }) 
   );
 }
 
+function getYouTubeThumbnail(videoUrl?: string): string | null {
+  if (!videoUrl) return null;
+  const match = videoUrl.match(/\/embed\/([a-zA-Z0-9_-]+)/);
+  return match ? `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg` : null;
+}
+
 function WorkCard({ item, onClick }: { item: WorkItem; onClick: () => void }) {
   const [hovered, setHovered] = useState(false);
-
+  const thumbnail = item.thumbnailUrl || getYouTubeThumbnail(item.videoUrl);
   return (
     <div
       onMouseEnter={() => setHovered(true)}
@@ -35,13 +41,13 @@ function WorkCard({ item, onClick }: { item: WorkItem; onClick: () => void }) {
         className="flex items-center justify-center relative overflow-hidden"
         style={{
           aspectRatio: item.wide ? "16/7" : item.aspect,
-          background: item.thumbnailUrl
-            ? `url(${item.thumbnailUrl}) center/cover`
+          background: thumbnail
+            ? `url(${thumbnail}) center/cover`
             : `linear-gradient(135deg, ${item.color}11 0%, #000 100%)`,
         }}
       >
         {/* Decorative grid */}
-        {!item.thumbnailUrl && (
+        {!thumbnail && (
           <div
             className="absolute inset-0"
             style={{
