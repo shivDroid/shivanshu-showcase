@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { CATEGORIES, WORK_ITEMS, type WorkItem } from "@/config/portfolio";
 import VideoModal from "./VideoModal";
 
