@@ -44,7 +44,7 @@ export const WORK_ITEMS: WorkItem[] = [
     aspect: "16/9",
     wide: true,
     videoUrl: "https://www.youtube.com/embed?listType=user_uploads&list=anime-music-zone",
-    thumbnailUrl: "",
+    thumbnailUrl: "https://img.youtube.com/vi/_xEDmgVscdc/hqdefault.jpg",
     externalUrl: "https://www.youtube.com/@anime-music-zone/videos",
   },
   {
@@ -58,7 +58,7 @@ export const WORK_ITEMS: WorkItem[] = [
     aspect: "16/9",
     wide: false,
     videoUrl: "",
-    thumbnailUrl: "",
+    thumbnailUrl: "https://img.youtube.com/vi/4mHaVabDmI4/hqdefault.jpg",
     externalUrl: "https://www.youtube.com/channel/UCKriIFsJkw3L1__p5VMcGLQ",
   },
   {
@@ -72,7 +72,7 @@ export const WORK_ITEMS: WorkItem[] = [
     aspect: "16/9",
     wide: false,
     videoUrl: "",
-    thumbnailUrl: "",
+    thumbnailUrl: "https://img.youtube.com/vi/GcbkY-GRNVI/hqdefault.jpg",
     externalUrl: "https://www.youtube.com/channel/UCMIKiS8fI9Wu3t6qkZYoGhA",
   },
 
@@ -88,7 +88,7 @@ export const WORK_ITEMS: WorkItem[] = [
     aspect: "16/9",
     wide: true,
     videoUrl: "",
-    thumbnailUrl: "",
+    thumbnailUrl: "https://img.youtube.com/vi/IEIHoqIGzDo/hqdefault.jpg",
     externalUrl: "https://www.youtube.com/channel/UC7FGrszVcL7LVz8cB6ZcvLA",
   },
 
