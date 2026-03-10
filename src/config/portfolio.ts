@@ -44,7 +44,7 @@ export const WORK_ITEMS: WorkItem[] = [
     aspect: "16/9",
     wide: true,
     videoUrl: "https://www.youtube.com/embed?listType=user_uploads&list=anime-music-zone",
-    thumbnailUrl: "",
+    thumbnailUrl: "https://img.youtube.com/vi/_xEDmgVscdc/hqdefault.jpg",
     externalUrl: "https://www.youtube.com/@anime-music-zone/videos",
   },
   {
