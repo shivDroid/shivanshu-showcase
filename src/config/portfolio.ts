@@ -72,7 +72,7 @@ export const WORK_ITEMS: WorkItem[] = [
     aspect: "16/9",
     wide: false,
     videoUrl: "",
-    thumbnailUrl: "",
+    thumbnailUrl: "https://img.youtube.com/vi/GcbkY-GRNVI/hqdefault.jpg",
     externalUrl: "https://www.youtube.com/channel/UCMIKiS8fI9Wu3t6qkZYoGhA",
   },
 
