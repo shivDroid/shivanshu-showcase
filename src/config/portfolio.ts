@@ -8,14 +8,13 @@ export const NAV_LINKS = ["Work", "About", "Services", "Contact"];
 // ── Work Categories ──
 export const CATEGORIES = [
   { id: "all", label: "All" },
-  { id: "music", label: "Music Channels" },
-  { id: "medical", label: "Medical Channels" },
   { id: "ugc", label: "UGC Videos" },
+  { id: "medical", label: "Medical Channels" },
   { id: "ads", label: "Ad Creatives" },
+  { id: "music", label: "Music Channels" },
 ];
 
 // ── Work Items ──
-// Add videoUrl for embed playback, thumbnailUrl for static thumbnail
 export interface WorkItem {
   id: number;
   category: string;
@@ -26,72 +25,14 @@ export interface WorkItem {
   bg: string;
   aspect: string;
   wide: boolean;
-  videoUrl?: string;       // YouTube/Vimeo embed URL
-  thumbnailUrl?: string;   // Static thumbnail image
-  externalUrl?: string;    // Link to external channel/page
+  videoUrl?: string;
+  thumbnailUrl?: string;
+  externalUrl?: string;
+  hoverText?: string;
 }
 
+// Order: UGC → Medical → More UGC/Ads → Music
 export const WORK_ITEMS: WorkItem[] = [
-  // ── Music Channels (Faceless) ──
-  {
-    id: 1,
-    category: "music",
-    title: "Anime Music Zone",
-    sub: "Faceless anime music channel",
-    tag: "Music Channel",
-    color: "#0FF",
-    bg: "#0a0a0f",
-    aspect: "16/9",
-    wide: true,
-    videoUrl: "https://www.youtube.com/embed?listType=user_uploads&list=anime-music-zone",
-    thumbnailUrl: "https://img.youtube.com/vi/_xEDmgVscdc/hqdefault.jpg",
-    externalUrl: "https://www.youtube.com/@anime-music-zone/videos",
-  },
-  {
-    id: 2,
-    category: "music",
-    title: "Music Channel #2",
-    sub: "Faceless music curation",
-    tag: "Music Channel",
-    color: "#0FF",
-    bg: "#0a0a0f",
-    aspect: "16/9",
-    wide: false,
-    videoUrl: "",
-    thumbnailUrl: "https://img.youtube.com/vi/4mHaVabDmI4/hqdefault.jpg",
-    externalUrl: "https://www.youtube.com/channel/UCKriIFsJkw3L1__p5VMcGLQ",
-  },
-  {
-    id: 3,
-    category: "music",
-    title: "Music Channel #3",
-    sub: "Faceless music curation",
-    tag: "Music Channel",
-    color: "#0FF",
-    bg: "#0a0a0f",
-    aspect: "16/9",
-    wide: false,
-    videoUrl: "",
-    thumbnailUrl: "https://img.youtube.com/vi/GcbkY-GRNVI/hqdefault.jpg",
-    externalUrl: "https://www.youtube.com/channel/UCMIKiS8fI9Wu3t6qkZYoGhA",
-  },
-
-  // ── Medical Channels (Faceless) ──
-  {
-    id: 4,
-    category: "medical",
-    title: "Medical Education Channel",
-    sub: "Faceless medical explainers",
-    tag: "Medical Channel",
-    color: "#7B61FF",
-    bg: "#0a0a14",
-    aspect: "16/9",
-    wide: true,
-    videoUrl: "",
-    thumbnailUrl: "https://img.youtube.com/vi/IEIHoqIGzDo/hqdefault.jpg",
-    externalUrl: "https://www.youtube.com/channel/UC7FGrszVcL7LVz8cB6ZcvLA",
-  },
-
   // ── UGC Videos (9:16) ──
   {
     id: 5,
@@ -133,7 +74,65 @@ export const WORK_ITEMS: WorkItem[] = [
     thumbnailUrl: "",
   },
 
-  // ── Ad Creatives / Demo Videos (16:9) ──
+  // ── Medical Channel ──
+  {
+    id: 4,
+    category: "medical",
+    title: "Medical Education Channel",
+    sub: "Faceless medical explainers",
+    tag: "Medical Channel",
+    color: "#7B61FF",
+    bg: "#0a0a14",
+    aspect: "16/9",
+    wide: true,
+    videoUrl: "",
+    thumbnailUrl: "https://img.youtube.com/vi/IEIHoqIGzDo/hqdefault.jpg",
+    externalUrl: "https://www.youtube.com/channel/UC7FGrszVcL7LVz8cB6ZcvLA",
+    hoverText: "Experience the quality of AI-generated voiceovers in medical education content",
+  },
+
+  // ── More UGC / Ads ──
+  {
+    id: 10,
+    category: "ugc",
+    title: "Look Maxxing Ad",
+    sub: "Short-form · transformation",
+    tag: "UGC",
+    color: "#FF3CAC",
+    bg: "#0f0a0f",
+    aspect: "9/16",
+    wide: false,
+    videoUrl: "https://www.youtube.com/embed/ogcqyYLxpMI",
+    thumbnailUrl: "",
+  },
+  {
+    id: 11,
+    category: "ugc",
+    title: "Toothpaste Ad",
+    sub: "Short-form · product spot",
+    tag: "UGC",
+    color: "#FF3CAC",
+    bg: "#0f0a0f",
+    aspect: "9/16",
+    wide: false,
+    videoUrl: "https://www.youtube.com/embed/lyWGH6IVmcU",
+    thumbnailUrl: "",
+  },
+  {
+    id: 12,
+    category: "ugc",
+    title: "Panic Attack Relief Ad",
+    sub: "Short-form · wellness",
+    tag: "UGC",
+    color: "#FF3CAC",
+    bg: "#0f0a0f",
+    aspect: "9/16",
+    wide: false,
+    videoUrl: "https://www.youtube.com/embed/kQflYXLSKMI",
+    thumbnailUrl: "",
+  },
+
+  // ── Ad Creatives (16:9) ──
   {
     id: 8,
     category: "ads",
@@ -157,8 +156,55 @@ export const WORK_ITEMS: WorkItem[] = [
     bg: "#0f0f0a",
     aspect: "16/9",
     wide: false,
-    videoUrl: "",
+    videoUrl: "https://www.youtube.com/embed/baixoerN9uE",
     thumbnailUrl: "",
+  },
+
+  // ── Music Channels (lowest priority) ──
+  {
+    id: 1,
+    category: "music",
+    title: "Anime Music Zone",
+    sub: "Faceless anime music channel",
+    tag: "Music Channel",
+    color: "#0FF",
+    bg: "#0a0a0f",
+    aspect: "16/9",
+    wide: true,
+    videoUrl: "",
+    thumbnailUrl: "https://img.youtube.com/vi/_xEDmgVscdc/hqdefault.jpg",
+    externalUrl: "https://www.youtube.com/@anime-music-zone/videos",
+    hoverText: "AI-curated music with custom thumbnails — built for traction and views",
+  },
+  {
+    id: 2,
+    category: "music",
+    title: "Music Channel #2",
+    sub: "Faceless music curation",
+    tag: "Music Channel",
+    color: "#0FF",
+    bg: "#0a0a0f",
+    aspect: "16/9",
+    wide: false,
+    videoUrl: "",
+    thumbnailUrl: "https://img.youtube.com/vi/4mHaVabDmI4/hqdefault.jpg",
+    externalUrl: "https://www.youtube.com/channel/UCKriIFsJkw3L1__p5VMcGLQ",
+    hoverText: "AI-curated music with custom thumbnails — built for traction and views",
+  },
+  {
+    id: 3,
+    category: "music",
+    title: "Music Channel #3",
+    sub: "Faceless music curation",
+    tag: "Music Channel",
+    color: "#0FF",
+    bg: "#0a0a0f",
+    aspect: "16/9",
+    wide: false,
+    videoUrl: "",
+    thumbnailUrl: "https://img.youtube.com/vi/GcbkY-GRNVI/hqdefault.jpg",
+    externalUrl: "https://www.youtube.com/channel/UCMIKiS8fI9Wu3t6qkZYoGhA",
+    hoverText: "AI-curated music with custom thumbnails — built for traction and views",
   },
 ];
 
@@ -169,7 +215,7 @@ export interface ServiceItem {
   desc: string;
   tools: string[];
   color: string;
-  ctaLink?: string; // Optional "→ Enquire" link
+  ctaLink?: string;
 }
 
 export const SERVICES: ServiceItem[] = [
@@ -202,17 +248,11 @@ export const SERVICES: ServiceItem[] = [
 // ── About ──
 export const ABOUT_SKILLS = ["n8n", "Runway", "ElevenLabs", "Claude API", "Python", "Make.com"];
 
-export const PROFILE_FACTS = [
-  { l: "YouTube", v: "50K views" },
-  { l: "IIT Madras", v: "Data Science" },
-  { l: "Exp", v: "Founder's Office × 3" },
-];
-
 // Set to a real image URL to replace the ST initials placeholder
 export const AVATAR_URL = "";
 
 // ── Contact ──
-export const CAL_LINK = "https://cal.com"; // Replace with real Cal.com or Calendly link
+export const CAL_LINK = "https://calendly.com/tshivanshu29/30min";
 export const EMAIL = "tshivanshu29@gmail.com";
 
 // ── Social Links ──

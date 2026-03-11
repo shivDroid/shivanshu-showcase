@@ -1,4 +1,4 @@
-import { ABOUT_SKILLS, PROFILE_FACTS, AVATAR_URL } from "@/config/portfolio";
+import { ABOUT_SKILLS, AVATAR_URL } from "@/config/portfolio";
 
 export default function AboutSection() {
   return (
@@ -78,16 +78,8 @@ export default function AboutSection() {
           </div>
         )}
         <div className="font-heading font-bold text-xl mb-1">Shivanshu Tripathi</div>
-        <div className="text-[11px] text-primary font-mono tracking-[0.12em] mb-6">
+        <div className="text-[11px] text-primary font-mono tracking-[0.12em]">
           AI CONTENT BUILDER · GURGAON, INDIA
-        </div>
-        <div className="border-t border-border pt-6 flex flex-col gap-3">
-          {PROFILE_FACTS.map((r) => (
-            <div key={r.l} className="flex justify-between text-[12px] font-mono" style={{ color: "#555" }}>
-              <span className="tracking-[0.08em]">{r.l}</span>
-              <span style={{ color: "#ccc" }}>{r.v}</span>
-            </div>
-          ))}
         </div>
       </div>
     </section>

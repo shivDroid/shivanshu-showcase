@@ -46,7 +46,6 @@ export default function ContactSection() {
       {/* Footer */}
       <div className="mt-20 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] font-mono tracking-[0.08em]" style={{ color: "#333" }}>
         <span>© {new Date().getFullYear()} SHIVANSHU TRIPATHI</span>
-        <span className="text-primary">SHIVANSHU.DEV</span>
         <div className="flex gap-6">
           <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors cursor-pointer">LINKEDIN</a>
           <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors cursor-pointer">YOUTUBE</a>

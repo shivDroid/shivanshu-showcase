@@ -1,5 +1,6 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { CATEGORIES, WORK_ITEMS, type WorkItem } from "@/config/portfolio";
+import { useIsMobile } from "@/hooks/use-mobile";
 import VideoModal from "./VideoModal";
 
 function Tag({ color, children }: { color: string; children: React.ReactNode }) {
@@ -19,9 +20,11 @@ function getYouTubeThumbnail(videoUrl?: string): string | null {
   return match ? `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg` : null;
 }
 
-function WorkCard({ item, onClick }: { item: WorkItem; onClick: () => void }) {
+function WorkCard({ item, onClick, isMobile }: { item: WorkItem; onClick: () => void; isMobile: boolean }) {
   const [hovered, setHovered] = useState(false);
   const thumbnail = item.thumbnailUrl || getYouTubeThumbnail(item.videoUrl);
+  const showHoverText = item.hoverText && (hovered || isMobile);
+
   return (
     <div
       onMouseEnter={() => setHovered(true)}
@@ -29,7 +32,7 @@ function WorkCard({ item, onClick }: { item: WorkItem; onClick: () => void }) {
       onClick={onClick}
       className="overflow-hidden cursor-pointer transition-all duration-300"
       style={{
-        gridColumn: item.wide ? "span 2" : "span 1",
+        gridColumn: isMobile ? "span 1" : item.wide ? "span 2" : "span 1",
         background: item.bg,
         border: `1px solid ${hovered ? item.color + "55" : "hsl(var(--border))"}`,
         borderRadius: 4,
@@ -40,7 +43,7 @@ function WorkCard({ item, onClick }: { item: WorkItem; onClick: () => void }) {
       <div
         className="flex items-center justify-center relative overflow-hidden"
         style={{
-          aspectRatio: item.wide ? "16/7" : item.aspect,
+          aspectRatio: isMobile ? "16/9" : (item.wide ? "16/7" : item.aspect),
           background: thumbnail
             ? `url(${thumbnail}) center/cover`
             : `linear-gradient(135deg, ${item.color}11 0%, #000 100%)`,
@@ -56,28 +59,48 @@ function WorkCard({ item, onClick }: { item: WorkItem; onClick: () => void }) {
             }}
           />
         )}
-        {/* Play button */}
-        <div
-          className="flex items-center justify-center rounded-full transition-all duration-300"
-          style={{
-            width: 48,
-            height: 48,
-            border: `1.5px solid ${item.color}`,
-            opacity: hovered ? 1 : 0.3,
-            transform: hovered ? "scale(1.1)" : "scale(1)",
-          }}
-        >
+
+        {/* Hover overlay with text */}
+        {item.hoverText && (
           <div
+            className="absolute inset-0 flex items-center justify-center p-4 transition-opacity duration-300"
             style={{
-              width: 0,
-              height: 0,
-              borderTop: "7px solid transparent",
-              borderBottom: "7px solid transparent",
-              borderLeft: `12px solid ${item.color}`,
-              marginLeft: 4,
+              background: "rgba(0,0,0,0.7)",
+              opacity: hovered ? 1 : 0,
+              pointerEvents: "none",
             }}
-          />
-        </div>
+          >
+            <p className="text-center text-[13px] font-mono tracking-wide" style={{ color: item.color }}>
+              {item.hoverText}
+            </p>
+          </div>
+        )}
+
+        {/* Play button */}
+        {!item.hoverText || !hovered ? (
+          <div
+            className="flex items-center justify-center rounded-full transition-all duration-300"
+            style={{
+              width: 48,
+              height: 48,
+              border: `1.5px solid ${item.color}`,
+              opacity: hovered ? 1 : 0.3,
+              transform: hovered ? "scale(1.1)" : "scale(1)",
+            }}
+          >
+            <div
+              style={{
+                width: 0,
+                height: 0,
+                borderTop: "7px solid transparent",
+                borderBottom: "7px solid transparent",
+                borderLeft: `12px solid ${item.color}`,
+                marginLeft: 4,
+              }}
+            />
+          </div>
+        ) : null}
+
         {/* Tag */}
         <div className="absolute top-3 left-3">
           <Tag color={item.color}>{item.tag}</Tag>
@@ -92,6 +115,12 @@ function WorkCard({ item, onClick }: { item: WorkItem; onClick: () => void }) {
         <div className="text-[11px] font-mono tracking-[0.08em]" style={{ color: "#666" }}>
           {item.sub}
         </div>
+        {/* Show hover text as subtext on mobile */}
+        {isMobile && item.hoverText && (
+          <div className="text-[11px] font-mono tracking-[0.04em] mt-2" style={{ color: item.color + "99" }}>
+            {item.hoverText}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -100,6 +129,7 @@ function WorkCard({ item, onClick }: { item: WorkItem; onClick: () => void }) {
 export default function WorkSection() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedItem, setSelectedItem] = useState<WorkItem | null>(null);
+  const isMobile = useIsMobile();
 
   const filtered = WORK_ITEMS.filter(
     (w) => activeCategory === "all" || w.category === activeCategory
@@ -134,6 +164,7 @@ export default function WorkSection() {
             <WorkCard
               key={item.id}
               item={item}
+              isMobile={isMobile}
               onClick={() => {
                 if (item.videoUrl) setSelectedItem(item);
                 else if (item.externalUrl) window.open(item.externalUrl, "_blank");
