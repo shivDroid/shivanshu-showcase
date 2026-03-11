@@ -166,8 +166,17 @@ export default function WorkSection() {
               item={item}
               isMobile={isMobile}
               onClick={() => {
-                if (item.videoUrl) setSelectedItem(item);
-                else if (item.externalUrl) window.open(item.externalUrl, "_blank");
+                if (item.videoUrl) {
+                  setSelectedItem(item);
+                } else if (item.externalUrl) {
+                  const a = document.createElement("a");
+                  a.href = item.externalUrl;
+                  a.target = "_blank";
+                  a.rel = "noopener noreferrer";
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
+                }
               }}
             />
           ))}

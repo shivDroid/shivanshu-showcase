@@ -31,9 +31,9 @@ export interface WorkItem {
   hoverText?: string;
 }
 
-// Order: UGC → Medical → More UGC/Ads → Music
+// Order: All 9:16 UGC grouped → Medical → Ad Creatives → Music
 export const WORK_ITEMS: WorkItem[] = [
-  // ── UGC Videos (9:16) ──
+  // ── UGC Videos (all 9:16 grouped) ──
   {
     id: 5,
     category: "ugc",
@@ -73,25 +73,6 @@ export const WORK_ITEMS: WorkItem[] = [
     videoUrl: "https://www.youtube.com/embed/YHnjDHbUtYs",
     thumbnailUrl: "",
   },
-
-  // ── Medical Channel ──
-  {
-    id: 4,
-    category: "medical",
-    title: "Medical Education Channel",
-    sub: "Faceless medical explainers",
-    tag: "Medical Channel",
-    color: "#7B61FF",
-    bg: "#0a0a14",
-    aspect: "16/9",
-    wide: true,
-    videoUrl: "",
-    thumbnailUrl: "https://img.youtube.com/vi/IEIHoqIGzDo/hqdefault.jpg",
-    externalUrl: "https://www.youtube.com/channel/UC7FGrszVcL7LVz8cB6ZcvLA",
-    hoverText: "Experience the quality of AI-generated voiceovers in medical education content",
-  },
-
-  // ── More UGC / Ads ──
   {
     id: 10,
     category: "ugc",
@@ -130,6 +111,23 @@ export const WORK_ITEMS: WorkItem[] = [
     wide: false,
     videoUrl: "https://www.youtube.com/embed/kQflYXLSKMI",
     thumbnailUrl: "",
+  },
+
+  // ── Medical Channel ──
+  {
+    id: 4,
+    category: "medical",
+    title: "Medical Education Channel",
+    sub: "Faceless medical explainers",
+    tag: "Medical Channel",
+    color: "#7B61FF",
+    bg: "#0a0a14",
+    aspect: "16/9",
+    wide: true,
+    videoUrl: "",
+    thumbnailUrl: "https://img.youtube.com/vi/IEIHoqIGzDo/hqdefault.jpg",
+    externalUrl: "https://www.youtube.com/channel/UC7FGrszVcL7LVz8cB6ZcvLA",
+    hoverText: "Experience the quality of AI-generated voiceovers in medical education content",
   },
 
   // ── Ad Creatives (16:9) ──
