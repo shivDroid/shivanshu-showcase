@@ -35,19 +35,6 @@ export interface WorkItem {
 export const WORK_ITEMS: WorkItem[] = [
   // ── UGC Videos (all 9:16 grouped) ──
   {
-    id: 5,
-    category: "ugc",
-    title: "Clipping UGC Video",
-    sub: "Short-form clipping style",
-    tag: "UGC",
-    color: "#FF3CAC",
-    bg: "#0f0a0f",
-    aspect: "9/16",
-    wide: false,
-    videoUrl: "https://www.youtube.com/embed/9MRdboXMUFc",
-    thumbnailUrl: "",
-  },
-  {
     id: 6,
     category: "ugc",
     title: "Student UGC – Making Money IRL",
@@ -110,6 +97,19 @@ export const WORK_ITEMS: WorkItem[] = [
     aspect: "9/16",
     wide: false,
     videoUrl: "https://www.youtube.com/embed/kQflYXLSKMI",
+    thumbnailUrl: "",
+  },
+  {
+    id: 5,
+    category: "ugc",
+    title: "Clipping UGC Video",
+    sub: "Short-form clipping style",
+    tag: "UGC",
+    color: "#FF3CAC",
+    bg: "#0f0a0f",
+    aspect: "9/16",
+    wide: false,
+    videoUrl: "https://www.youtube.com/embed/9MRdboXMUFc",
     thumbnailUrl: "",
   },
 
