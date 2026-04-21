@@ -1,13 +1,73 @@
+import { useRef, useState, useCallback } from "react";
+import { WORK_ITEMS } from "@/config/portfolio";
+
 export default function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [mouse, setMouse] = useState({ x: -999, y: -999, active: false });
+
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top, active: true });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setMouse((prev) => ({ ...prev, active: false }));
+  }, []);
+
+  // Pick thumbnails for the background mosaic
+  const thumbItems = WORK_ITEMS.filter((w) => w.thumbnailUrl || w.videoUrl).slice(0, 12);
 
   return (
     <section
       id="hero"
       className="min-h-screen flex flex-col justify-end px-6 md:px-10 pb-16 md:pb-20 relative overflow-hidden"
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
+      {/* Torch reveal layer — blurred preview thumbnails */}
+      <div
+        className="absolute inset-0 pointer-events-none z-[1] transition-opacity duration-300"
+        style={{
+          opacity: mouse.active ? 1 : 0,
+          maskImage: `radial-gradient(circle 140px at ${mouse.x}px ${mouse.y}px, black 0%, transparent 100%)`,
+          WebkitMaskImage: `radial-gradient(circle 140px at ${mouse.x}px ${mouse.y}px, black 0%, transparent 100%)`,
+        }}
+      >
+        <div className="absolute inset-0 grid grid-cols-3 md:grid-cols-4 gap-3 p-8 opacity-40">
+          {thumbItems.map((item, i) => {
+            const thumbSrc = item.thumbnailUrl || 
+              (item.videoUrl?.includes("youtube.com/embed/")
+                ? `https://img.youtube.com/vi/${item.videoUrl.split("/embed/")[1]?.split("?")[0]}/hqdefault.jpg`
+                : "");
+            if (!thumbSrc) return null;
+            return (
+              <div
+                key={item.id}
+                className="rounded overflow-hidden"
+                style={{
+                  aspectRatio: item.aspect === "9/16" ? "9/16" : "16/9",
+                  filter: "blur(6px) saturate(0.6)",
+                  animationDelay: `${i * 0.05}s`,
+                }}
+              >
+                <img
+                  src={thumbSrc}
+                  alt=""
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  draggable={false}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Grain overlay */}
       <div className="grain-overlay" />
 
@@ -46,7 +106,7 @@ export default function HeroSection() {
       />
 
       {/* Available badge */}
-      <div className="flex items-center gap-2 mb-8 relative">
+      <div className="flex items-center gap-2 mb-8 relative z-[2]">
         <div
           className="w-1.5 h-1.5 rounded-full"
           style={{ background: "#39FF14", boxShadow: "0 0 8px #39FF14" }}
@@ -57,7 +117,7 @@ export default function HeroSection() {
       </div>
 
       {/* Big headline with stagger */}
-      <div className="relative max-w-[900px]">
+      <div className="relative max-w-[900px] z-[2]">
         <h1
           className="font-heading font-extrabold leading-[0.95] tracking-tighter mb-8"
           style={{ fontSize: "clamp(48px, 8vw, 96px)" }}
