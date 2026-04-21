@@ -309,7 +309,5 @@ export const EMAIL = "tshivanshu29@gmail.com";
 
 // ── Social Links ──
 export const SOCIAL_LINKS = {
-  linkedin: "https://linkedin.com",
-  youtube: "https://youtube.com",
-  twitter: "https://twitter.com",
+  linkedin: "https://www.linkedin.com/in/shivanshu65165/",
 };

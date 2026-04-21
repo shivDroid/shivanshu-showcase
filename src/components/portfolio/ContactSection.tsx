@@ -48,8 +48,7 @@ export default function ContactSection() {
         <span>© {new Date().getFullYear()} SHIVANSHU TRIPATHI</span>
         <div className="flex gap-6">
           <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors cursor-pointer">LINKEDIN</a>
-          <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors cursor-pointer">YOUTUBE</a>
-          <a href={SOCIAL_LINKS.twitter} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors cursor-pointer">TWITTER</a>
+          <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="cta-btn-outline" style={{ fontSize: "11px", padding: "8px 20px", letterSpacing: "0.08em" }}>CONNECT ON LINKEDIN →</a>
         </div>
       </div>
     </section>
