@@ -41,15 +41,9 @@ export default function ContactSection() {
         <a href={`mailto:${EMAIL}`} className="cta-btn-outline">
           {EMAIL}
         </a>
-      </div>
-
-      {/* Footer */}
-      <div className="mt-20 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] font-mono tracking-[0.08em]" style={{ color: "#333" }}>
-        <span>© {new Date().getFullYear()} SHIVANSHU TRIPATHI</span>
-        <div className="flex gap-6">
-          <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors cursor-pointer">LINKEDIN</a>
-          <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="cta-btn-outline" style={{ fontSize: "11px", padding: "8px 20px", letterSpacing: "0.08em" }}>CONNECT ON LINKEDIN →</a>
-        </div>
+        <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="cta-btn-outline">
+          Connect on LinkedIn →
+        </a>
       </div>
     </section>
   );
