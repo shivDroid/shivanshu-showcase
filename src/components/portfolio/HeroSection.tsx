@@ -1,5 +1,15 @@
 import { useRef, useState, useCallback } from "react";
 import heroSilhouette from "@/assets/hero-silhouette.png";
+import { WORK_ITEMS } from "@/config/portfolio";
+
+// Extract YouTube video IDs for thumbnails from actual UGC content
+const UGC_THUMBNAILS = WORK_ITEMS
+  .filter((item) => item.videoUrl?.includes("youtube.com/embed/"))
+  .slice(0, 9)
+  .map((item) => {
+    const id = item.videoUrl!.split("/embed/")[1];
+    return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+  });
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -80,15 +90,8 @@ export default function HeroSection() {
           maskImage: `radial-gradient(circle 180px at ${mouse.x}px ${mouse.y}px, black 0%, transparent 100%)`,
         }}
       >
-        <div className="w-full h-full grid grid-cols-3 gap-4 p-16 opacity-40 blur-[2px]">
-          {[
-            "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&q=60",
-            "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&q=60",
-            "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&q=60",
-            "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=60",
-            "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&q=60",
-            "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&q=60",
-          ].map((src, i) => (
+        <div className="w-full h-full grid grid-cols-3 gap-4 p-16 opacity-40 blur-[3px]">
+          {UGC_THUMBNAILS.map((src, i) => (
             <img
               key={i}
               src={src}
