@@ -184,4 +184,18 @@
     background-repeat: repeat;
     background-size: 128px 128px;
   }
+
+  /* Hero corner markers */
+  .hero-corner {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 1.5px solid hsl(0 0% 40%);
+    z-index: 10;
+    pointer-events: none;
+  }
+  .hero-corner--tl { top: 32px; left: 32px; border-right: none; border-bottom: none; }
+  .hero-corner--tr { top: 32px; right: 32px; border-left: none; border-bottom: none; }
+  .hero-corner--bl { bottom: 32px; left: 32px; border-right: none; border-top: none; }
+  .hero-corner--br { bottom: 32px; right: 32px; border-left: none; border-top: none; }
 }
