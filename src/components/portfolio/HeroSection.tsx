@@ -1,5 +1,5 @@
 import { useRef, useState, useCallback } from "react";
-import { WORK_ITEMS } from "@/config/portfolio";
+import heroSilhouette from "@/assets/hero-silhouette.png";
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -18,141 +18,94 @@ export default function HeroSection() {
     setMouse((prev) => ({ ...prev, active: false }));
   }, []);
 
-  // Pick thumbnails for the background mosaic
-  const thumbItems = WORK_ITEMS.filter((w) => w.thumbnailUrl || w.videoUrl).slice(0, 12);
-
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col justify-end px-6 md:px-10 pb-16 md:pb-20 relative overflow-hidden"
+      className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Torch reveal layer — blurred preview thumbnails */}
+      {/* Grain overlay */}
+      <div className="grain-overlay" />
+
+      {/* Vignette */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 70% 60% at center, transparent 30%, hsl(var(--background)) 100%)",
+          zIndex: 2,
+        }}
+      />
+
+      {/* Central silhouette */}
+      <div className="absolute inset-0 flex items-center justify-center z-[1]">
+        <img
+          src={heroSilhouette}
+          alt=""
+          className="h-[85vh] w-auto object-contain opacity-70 select-none"
+          draggable={false}
+          width={1024}
+          height={1024}
+        />
+      </div>
+
+      {/* Torch cursor glow */}
       <div
         className="absolute inset-0 pointer-events-none z-[1] transition-opacity duration-300"
         style={{
           opacity: mouse.active ? 1 : 0,
-          maskImage: `radial-gradient(circle 140px at ${mouse.x}px ${mouse.y}px, black 0%, transparent 100%)`,
-          WebkitMaskImage: `radial-gradient(circle 140px at ${mouse.x}px ${mouse.y}px, black 0%, transparent 100%)`,
+          background: `radial-gradient(circle 200px at ${mouse.x}px ${mouse.y}px, hsl(180 100% 50% / 0.06) 0%, transparent 100%)`,
         }}
+      />
+
+      {/* Corner markers */}
+      <div className="hero-corner hero-corner--tl" />
+      <div className="hero-corner hero-corner--tr" />
+      <div className="hero-corner hero-corner--bl" />
+      <div className="hero-corner hero-corner--br" />
+
+      {/* Get in touch — bottom left */}
+      <button
+        className="absolute bottom-8 left-8 z-10 cta-btn-outline text-[11px] px-5 py-3"
+        onClick={() => scrollTo("contact")}
       >
-        <div className="absolute inset-0 grid grid-cols-3 md:grid-cols-4 gap-3 p-8 opacity-40">
-          {thumbItems.map((item, i) => {
-            const thumbSrc = item.thumbnailUrl || 
-              (item.videoUrl?.includes("youtube.com/embed/")
-                ? `https://img.youtube.com/vi/${item.videoUrl.split("/embed/")[1]?.split("?")[0]}/hqdefault.jpg`
-                : "");
-            if (!thumbSrc) return null;
-            return (
-              <div
-                key={item.id}
-                className="rounded overflow-hidden"
-                style={{
-                  aspectRatio: item.aspect === "9/16" ? "9/16" : "16/9",
-                  filter: "blur(6px) saturate(0.6)",
-                  animationDelay: `${i * 0.05}s`,
-                }}
-              >
-                <img
-                  src={thumbSrc}
-                  alt=""
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  draggable={false}
-                />
-              </div>
-            );
-          })}
-        </div>
+        Get in touch →
+      </button>
+
+      {/* Center text */}
+      <div className="relative z-[3] text-center flex flex-col items-center mt-[20vh]">
+        <h1
+          className="font-heading font-extrabold leading-[1.15] tracking-tight mb-4"
+          style={{ fontSize: "clamp(28px, 4vw, 52px)" }}
+        >
+          <span className="hero-word" style={{ animationDelay: "0.1s" }}>Shivanshu.</span>
+          <br />
+          <span className="hero-word text-muted-foreground font-light" style={{ animationDelay: "0.3s", fontSize: "clamp(20px, 3vw, 38px)" }}>
+            AI Content & Systems for those
+          </span>
+          <br />
+          <span className="hero-word text-muted-foreground font-light" style={{ animationDelay: "0.5s", fontSize: "clamp(20px, 3vw, 38px)" }}>
+            who refuse to settle.
+          </span>
+        </h1>
       </div>
 
-      {/* Grain overlay */}
-      <div className="grain-overlay" />
+      {/* 2024 — Future */}
+      <span className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 font-heading text-[13px] tracking-[0.15em] text-muted-foreground hero-word" style={{ animationDelay: "0.7s" }}>
+        2024 — Future
+      </span>
 
-      {/* BG grid */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(hsl(180 100% 50% / 0.02) 1px, transparent 1px), linear-gradient(90deg, hsl(180 100% 50% / 0.02) 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
-        }}
-      />
-
-      {/* Glow orbs */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          top: "20%",
-          right: "10%",
-          width: 500,
-          height: 500,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, hsl(180 100% 50% / 0.08) 0%, transparent 70%)",
-        }}
-      />
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          bottom: "10%",
-          left: "5%",
-          width: 300,
-          height: 300,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, hsl(256 100% 69% / 0.08) 0%, transparent 70%)",
-        }}
-      />
-
-      {/* Available badge */}
-      <div className="flex items-center gap-2 mb-8 relative z-[2]">
+      {/* Available badge — bottom right */}
+      <div className="absolute bottom-8 right-8 z-10 flex items-center gap-2">
         <div
           className="w-1.5 h-1.5 rounded-full"
           style={{ background: "#39FF14", boxShadow: "0 0 8px #39FF14" }}
         />
-        <span className="text-[11px] tracking-[0.15em] uppercase font-mono" style={{ color: "#39FF14" }}>
-          Available for freelance & consulting
+        <span className="text-[10px] tracking-[0.12em] uppercase font-mono" style={{ color: "#39FF14" }}>
+          Available
         </span>
       </div>
-
-      {/* Big headline with stagger */}
-      <div className="relative max-w-[900px] z-[2]">
-        <h1
-          className="font-heading font-extrabold leading-[0.95] tracking-tighter mb-8"
-          style={{ fontSize: "clamp(48px, 8vw, 96px)" }}
-        >
-          <span className="hero-word" style={{ animationDelay: "0.1s" }}>AI Content.</span>
-          <br />
-          <span
-            className="hero-word"
-            style={{
-              animationDelay: "0.3s",
-              color: "transparent",
-              WebkitTextStroke: "1px hsl(var(--primary))",
-            }}
-          >
-            Systems.
-          </span>
-          <br />
-          <span className="hero-word" style={{ animationDelay: "0.5s" }}>That Scale.</span>
-        </h1>
-
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
-          <p className="text-[15px] text-muted-foreground max-w-[420px] leading-[1.7] font-light">
-            I'm Shivanshu — I build AI-powered video pipelines, faceless channels, and automation systems that generate attention and revenue without a team.
-          </p>
-          <div className="flex gap-3">
-            <button className="cta-btn" onClick={() => scrollTo("work")}>
-              See My Work
-            </button>
-            <button className="cta-btn-outline" onClick={() => scrollTo("contact")}>
-              Book a Call
-            </button>
-          </div>
-        </div>
-      </div>
-
     </section>
   );
 }
